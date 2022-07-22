@@ -1,0 +1,15 @@
+{
+    // 配置src文件别名为@ 在node_modules 和 dist下无法使用
+    "compolerOptions":{
+        "baseUrl":"./",
+        "paths":{
+            "@/*":[
+                "src/*"
+            ]
+        }
+    },
+    "exclude": [
+        "node_modules",
+        "dist"
+    ]
+}
