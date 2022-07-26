@@ -1,7 +1,7 @@
 // 配置相关内容
 module.exports = {
     // 不适用eslint
-    //lintOnSave : false
+    lintOnSave : false,
 
     // 配置代理跨域
     devServer:{

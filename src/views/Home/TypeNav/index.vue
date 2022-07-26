@@ -1,7 +1,7 @@
 <template>
   <!-- 商品分类导航 -->
   <div class="type-nav">
-    <div class="container" @mouseleave="leaveIndex">
+    <div class="container" @mouseenter="enterShow" @mouseleave="leaveShow">
       <h2 class="all">全部商品分类</h2>
       <nav class="nav">
         <a href="###">服装城</a>
@@ -13,29 +13,32 @@
         <a href="###">有趣</a>
         <a href="###">秒杀</a>
       </nav>
-      <div class="sort">
-        <div class="all-sort-list2" @click="goSearch">
-          <div class="item" v-for="(cate, index) in categoryList" :key="cate.categoryId" :class="{cur:currentIndex==index}">
-            <h3 @mouseenter="changeIndex(index)">
-              <a :data-categoryName="cate.categoryName" :data-category1Id="cate.categoryId">{{cate.categoryName}}</a>
-            </h3>
-            <div class="item-list clearfix">
-              <div class="subitem" v-for="cateChild in cate.categoryChild" :key="cateChild.categoryId">
-                <dl class="fore">
-                  <dt>
-                    <a :data-categoryName="cateChild.categoryName" :data-category2Id="cateChild.categoryId">{{cateChild.categoryName}}</a>
-                  </dt>
-                  <dd>
-                    <em v-for="cateChildChild in cateChild.categoryChild" :key="cateChildChild.categoryId">
-                      <a :data-categoryName="cateChildChild.categoryName" :data-category3Id="cateChildChild.categoryId">{{cateChildChild.categoryName}}</a>
-                    </em>
-                  </dd>
-                </dl>
+      <!-- 过渡动画 -->
+      <transition name="sort">
+        <div class="sort" v-show="show">
+          <div class="all-sort-list2" @click="goSearch">
+            <div class="item" v-for="(cate, index) in categoryList" :key="cate.categoryId" :class="{cur:currentIndex==index}">
+              <h3 @mouseenter="changeIndex(index)">
+                <a :data-categoryName="cate.categoryName" :data-category1Id="cate.categoryId">{{cate.categoryName}}</a>
+              </h3>
+              <div class="item-list clearfix">
+                <div class="subitem" v-for="cateChild in cate.categoryChild" :key="cateChild.categoryId">
+                  <dl class="fore">
+                    <dt>
+                      <a :data-categoryName="cateChild.categoryName" :data-category2Id="cateChild.categoryId">{{cateChild.categoryName}}</a>
+                    </dt>
+                    <dd>
+                      <em v-for="cateChildChild in cateChild.categoryChild" :key="cateChildChild.categoryId">
+                        <a :data-categoryName="cateChildChild.categoryName" :data-category3Id="cateChildChild.categoryId">{{cateChildChild.categoryName}}</a>
+                      </em>
+                    </dd>
+                  </dl>
+                </div>
               </div>
             </div>
           </div>
         </div>
-      </div>
+      </transition>
     </div>
   </div>
 </template>
@@ -49,13 +52,15 @@ export default {
   data(){
     return {
       // 鼠标悬浮的一级分类的索引值
-      currentIndex:-1
+      currentIndex:-1,
+      show:true
     }
   },
   // 组件挂载完毕，可以向服务器发送请求
   mounted(){
-      //this.$store.dispatch('homeModule/categoryList');
-      this.$store.dispatch('categoryList');
+      if(this.$route.path != '/home'){
+        this.show = false;
+      }
   },
   computed:{
     // =---开启命名空间的写法
@@ -77,9 +82,6 @@ export default {
     changeIndex: _.throttle(function(index){
       this.currentIndex = index;
     },50),
-    leaveIndex(){
-      this.currentIndex = -1;
-    },
     goSearch(event){
       // 事件委派+ 编程式导航
       // 问题：不一定点到a把标签（事件委派是把全部子节点的事件都委托给父节点）；如何区分几级菜单
@@ -101,11 +103,29 @@ export default {
           query.category3Id = category3id
         }
         
-        location.query = query;
+        /*   --- 空对象转为布尔值也为true所以判断不用写
+        if(this.$route.params){
+          location.params = this.$route.params;
+        }
+        */
+       location.query = query;
+       location.params = this.$route.params;
         // 路由跳转
         this.$router.push(location);
       }
     },
+    enterShow(){
+      if(this.$route.path != '/home'){
+        this.show = true;
+      }
+    },
+    leaveShow(){
+      this.currentIndex = -1;
+      if(this.$route.path != '/home'){
+        this.show = false;
+      }
+    }
+
   }
 }
 </script>
@@ -234,6 +254,18 @@ export default {
           background-color: skyblue;
         }
       }
+    }
+    // 过渡动画开始的位置
+    .sort-enter{
+      height:0px;
+    }
+    // 过渡动画结束的位置
+    .sort-enter-to{
+      height:416px;
+    }
+    // 过渡动画时间速率
+    .sort-enter-active{
+      transition: all .5s linear
     }
   }
 }

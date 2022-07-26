@@ -1,7 +1,10 @@
 <template>
   <div>
-    <h1> params-----{{$route.params.keywords}}</h1>
-    <h1>query------{{$route.query.k}}</h1>
+    <TypeNav></TypeNav>
+    <h1>{{$route.query.categoryname}}</h1>
+    <h1>{{$route.query.category1Id}}</h1>
+    <h1>{{$route.query.category2Id}}</h1>
+    <h1>{{$route.query.category3Id}}</h1>
   </div>
 </template>
 

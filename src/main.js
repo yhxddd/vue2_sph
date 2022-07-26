@@ -7,6 +7,11 @@ import router from '@/router/index.js'
 import TypeNav from '@/views/Home/TypeNav/index.vue'
 
 import store from '@/store/index.js'
+// 引入mockserver.js ---没有对外暴露，只引入让mockServer执行
+import '@/mock/mockServer'
+
+//引入swiper样式
+import 'swiper/css/swiper.css'
 
 // import {reqCategoryList} from '@/api'
 // reqCategoryList();

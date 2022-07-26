@@ -15,6 +15,11 @@ export default {
   components: {
     MyHeader,
     MyFooter
+  },
+  mounted(){
+    // 向服务器发请求获取数据，如果放在子组件中会多次发请求，造成服务器的压力，因此写再根组件中只执行一次
+    //this.$store.dispatch('homeModule/categoryList');
+    this.$store.dispatch('categoryList');
   }
 }
 </script>

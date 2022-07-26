@@ -32,7 +32,7 @@
             </h1>
             <div class="searchArea">
                 <form action="###" class="searchForm">
-                    <input type="text" id="autocomplete" v-model="keywords" class="input-error input-xxlarge" />
+                    <input type="text" id="autocomplete" v-model="keyword" class="input-error input-xxlarge" />
                     <button class="sui-btn btn-xlarge btn-danger" type="button" @click="goSearch">搜索</button>
                 </form>
             </div>
@@ -44,26 +44,23 @@
 export default {
     data(){
         return {
-            keywords:''
+            keyword:''
         }
     },
     methods:{
         goSearch(){
-            console.log(this.keywords)
+            console.log(this.keyword)
             // 字符串写法
-            // this.$router.push("/search/" + this.keywords + "?k="+this.keywords.toUpperCase());
+            // this.$router.push("/search/" + this.keyword + "?k="+this.keyword.toUpperCase());
             // 模板字符串写法
-            // this.$router.push(`/search/${this.keywords}?k=${this.keywords.toUpperCase()}`)
+            // this.$router.push(`/search/${this.keyword}?k=${this.keyword.toUpperCase()}`)
             // 对象写法
             this.$router.push({
                 name:'searchComponent',
                 params:{
-                    keywords:this.keywords
-                    //keywords:''||undefined
+                    keyword:this.keyword ||undefined
                 },
-                query:{
-                    k:this.keywords.toUpperCase()
-                }
+                query: this.$route.query   //----空对象也不会是undefined，可以直接写
             })
         }
     }
