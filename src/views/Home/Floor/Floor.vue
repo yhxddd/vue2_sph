@@ -21,19 +21,7 @@
                 <img :src="listData.imgUrl" />
               </div>
               <div class="floorBanner">
-                <div class="swiper-container" ref="floor1Swiper">
-                  <div class="swiper-wrapper">
-                    <div class="swiper-slide" v-for="carousel in listData.carouselList" :key="carousel.id">
-                      <img :src="carousel.imgUrl">
-                    </div>
-                  </div>
-                  <!-- 如果需要分页器 -->
-                  <div class="swiper-pagination"></div>
-
-                  <!-- 如果需要导航按钮 -->
-                  <div class="swiper-button-prev"></div>
-                  <div class="swiper-button-next"></div>
-                </div>
+                <Carsousel :list="listData.carouselList"></Carsousel>
               </div>
               <div class="split">
                 <span class="floor-x-line"></span>
@@ -64,33 +52,45 @@
 </template>
 
 <script>
-import Swiper from 'swiper'
 export default {
   name: 'Floor',
   props:['listData'],
   mounted(){
     // 这次可以在mounted中实现是因为数据为父组件传递，结构已经渲染好之后菜执行mounted
-    new Swiper(this.$refs.floor1Swiper, {
-      loop: true, // 循环模式选项
-      
-      // 如果需要分页器
-      pagination: {
-        el: '.swiper-pagination',
-        clickable:true
-      },
-      
-      // 如果需要前进后退按钮
-      navigation: {
-        nextEl: '.swiper-button-next',
-        prevEl: '.swiper-button-prev',
-      },
-      
-      // 如果需要滚动条
-      scrollbar: {
-        el: '.swiper-scrollbar',
-      },
-    })
-  }
+
+  },
+  /*
+  // --- 可以在mounted中写，但是卸载watch中是为了与listContainer中保持一致，提取公共组件
+  watch:{
+    listData:{
+      // 如果不加immediate 则监听不到数据，因为该数据为父组件传递，没有发生变化
+      immediate:true,
+      handler(){
+        this.$nextTick( ()=> {
+          new Swiper(this.$refs.floor1Swiper, {
+              loop: true, // 循环模式选项
+              
+              // 如果需要分页器
+              pagination: {
+                el: '.swiper-pagination',
+                clickable:true
+              },
+              
+              // 如果需要前进后退按钮
+              navigation: {
+                nextEl: '.swiper-button-next',
+                prevEl: '.swiper-button-prev',
+              },
+              
+              // 如果需要滚动条
+              scrollbar: {
+                el: '.swiper-scrollbar',
+              },
+          })
+        })
+      }
+    }
+  }*/
 }
 </script>
 

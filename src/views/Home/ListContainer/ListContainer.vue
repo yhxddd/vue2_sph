@@ -3,20 +3,7 @@
     <div class="sortList clearfix">
       <div class="center">
         <!--banner轮播-->
-        <div class="swiper-container"  ref="mySwiper">
-          <div class="swiper-wrapper">
-            <div class="swiper-slide" v-for="carousel in bannerList" :key="carousel.id">
-              <!-- <img src="./images/banner1.jpg" /> -->
-              <img :src="carousel.imgUrl"/>
-            </div>
-          </div>
-          <!-- 如果需要分页器 -->
-          <div class="swiper-pagination"></div>
-
-          <!-- 如果需要导航按钮 -->
-          <div class="swiper-button-prev"></div>
-          <div class="swiper-button-next"></div>
-        </div>
+        <Carsousel :list="bannerList"></Carsousel>
       </div>
       <div class="right">
         <div class="news">
@@ -103,7 +90,6 @@
 
 <script>
 import {mapState} from 'vuex'
-import Swiper from 'swiper'
   export default {
     name: 'ListContainer',
     computed:{
@@ -116,6 +102,7 @@ import Swiper from 'swiper'
       // new swiper实例之前必须有数据，放在此处时，会进入mounted然后进入actions获取banner数据，
       // 然后直接new swiper，之后再将banner数据修改会vuex中(mutations)
     },
+    /*
     watch:{
       // bannerList由空数组变为有数据，所以可以采用监听的方式
       bannerList: {
@@ -146,7 +133,7 @@ import Swiper from 'swiper'
           })
         }
       }
-    }
+    }*/
   }
 </script>
 
