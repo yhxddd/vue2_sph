@@ -4,7 +4,7 @@ import App from './App.vue'
 import router from '@/router/index.js'
 
 // 三级联动组件---声明为全局组件
-import TypeNav from '@/views/Home/TypeNav/index.vue'
+import TypeNav from '@/components/TypeNav/index.vue'
 
 // 轮播图组件声明为全局组件
 import Carsousel from '@/components/Carsousel/index.vue'
