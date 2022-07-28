@@ -1,5 +1,5 @@
 // home模块的vuex
-import { reqCategoryList, reqBannerList, reqFloorList} from "../../api";
+import { reqCategoryList, reqBannerList, reqFloorList} from "../api";
 
 const actions = {
     async categoryList(context){

@@ -12,7 +12,7 @@ export const reqCategoryList = () => {
 
 //获取banner（Home首页轮播图数据）
 export const reqBannerList = () => {
-    return mockRequest.get('/banner')
+    return mockRequest({url:'/banner', method:'get'})
 }
 
 //获取floor
@@ -20,4 +20,8 @@ export const reqFloorList = () => {
     return mockRequest.get('/floor')
 }
 
+// 获取搜索模块数据，post请求带参数;给服务器传递参数至少是一个空对象
+export const reqSearchInfo = (params) => {
+    return requests({url:'/list', method:'post',data:params})
+}
 

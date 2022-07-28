@@ -49,7 +49,6 @@ export default {
     },
     methods:{
         goSearch(){
-            console.log(this.keyword)
             // 字符串写法
             // this.$router.push("/search/" + this.keyword + "?k="+this.keyword.toUpperCase());
             // 模板字符串写法
@@ -63,7 +62,13 @@ export default {
                 query: this.$route.query   //----空对象也不会是undefined，可以直接写
             })
         }
-    }
+    },
+    mounted(){
+        // 全局事件总线清楚keyword
+        this.$bus.$on('clear',() => {
+            this.keyword = ''
+        })
+    },
 }
 </script>
 
