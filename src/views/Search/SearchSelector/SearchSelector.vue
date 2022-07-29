@@ -16,7 +16,7 @@
       <div class="fl key">{{attr.attrName}}</div>
       <div class="fl value">
         <ul class="type-list">
-          <li v-for="(attrValue,index) in attr.attrValueList" :key="index">
+          <li v-for="(attrValue,index) in attr.attrValueList" :key="index" @click="attrInfo(attr, attrValue)">
             <a>{{attrValue}}</a>
           </li>
         </ul>
@@ -38,6 +38,11 @@
         alert(trademark)
         // 此处trademark是一个对象
         this.$emit('tradeMarkInfo', trademark)
+      },
+      attrInfo(attr, attrValue){
+        // ["属性ID:属性值:属性名"]
+        // attrValue是点击的当前的属性值，如果直接传attr过去是全部的attrList
+        this.$emit('attrInfo', attr, attrValue)
       }
     }
   }
