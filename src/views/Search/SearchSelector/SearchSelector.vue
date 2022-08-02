@@ -35,7 +35,6 @@
     },
     methods:{
       tradeMarkClick(trademark){
-        alert(trademark)
         // 此处trademark是一个对象
         this.$emit('tradeMarkInfo', trademark)
       },

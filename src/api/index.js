@@ -25,3 +25,8 @@ export const reqSearchInfo = (params) => {
     return requests({url:'/list', method:'post',data:params})
 }
 
+// 获取产品详情的数据 /api/item/{ skuId }
+export const reqGoodsDetail = (skuId) => {
+    return requests({url:`/item/${skuId}`, method:'get'})
+}
+
