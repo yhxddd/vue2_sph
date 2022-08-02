@@ -80,7 +80,8 @@
                 <a href="javascript:" class="mins" @click="skuNum>1?skuNum-- : skuNum = 1">-</a>
               </div>
               <div class="add">
-                <a href="javascript:">加入购物车</a>
+                <!-- 加入购物车的动作： 产品信息通过请求带回服务器-->
+                <a href="javascript:" @click="addShopCar">加入购物车</a>
               </div>
             </div>
           </div>
@@ -372,7 +373,23 @@
         }else{
           this.skuNum = parseInt(value);
         }
-
+      },
+      addShopCar(){
+        // 发请求将产品加入数据库  存储成功路由跳转  失败进行提示
+        try{
+          this.$store.dispatch('reqAddOrUpdateShop',{skuId:this.$route.params.skuid, skuNum:this.skuNum});
+          // 路由跳转到展示商品添加到购物车成功的信息，不进行购物车列表展示，
+          // skuNum可以直接通过query参数携带传递，但是skuInfo复杂的信息采用会话存储获取（不持久化，会话结束数据消失）
+          sessionStorage.setItem('SKUINFO',JSON.stringify(this.skuInfo))
+          this.$router.push({
+            name:'addCartSuccess',
+            query:{
+              skuNum: this.skuNum
+            }
+          })
+        }catch(error){
+          alert(error.message);
+        }
       }
     }
   }

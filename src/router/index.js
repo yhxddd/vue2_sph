@@ -10,6 +10,8 @@ import Login from '../views/Login/index.vue'
 import Register from '../views/Register/index.vue'
 import Search from '../views/Search/index.vue'
 import Detail from '../views/Detail/index.vue'
+import AddCartSuccess from '../views/AddCartSuccess/index.vue'
+import ShopCart from '../views/ShopCart/index.vue'
 // 将vueRouter原型对象的push保存一份---这个push的this为window，下面是用时，需要改变this指向
 let orginPush = VueRouter.prototype.push;
 let orginReplace = VueRouter.prototype.replace;
@@ -67,7 +69,19 @@ export default new VueRouter({
             path:'/detail/:skuid',
             component:Detail,
             meta:{show:true}
-        }
+        },
+        {
+            path:'/addCartSuccess',
+            name:'addCartSuccess',
+            component:AddCartSuccess,
+            meta:{show:true}
+        },
+        {
+            path:'/shopCart',
+            component:ShopCart,
+            meta:{show:true}
+        },
+        
     ],
     // 滚动行为 为跳转路由后页面位于哪个位置
     scrollBehavior(to, from, savedPosition){

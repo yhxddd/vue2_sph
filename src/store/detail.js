@@ -1,4 +1,4 @@
-import { reqGoodsDetail } from "../api"
+import { reqGoodsDetail, reqAddOrUpdateShop } from "../api"
 
 const actions = {
     async reqGoodsDetail(context,skuId){
@@ -7,12 +7,21 @@ const actions = {
         {
             context.commit('REQGOODSDETAIL',result.data)
         }
+    },
+    async reqAddOrUpdateShop(context, {skuId, skuNum}){
+        let result = await reqAddOrUpdateShop(skuId, skuNum);
+        // 此次请求，服务器不会返回data数据，因此不用再写mutations等内容
+        if(result.code == '200'){
+            return 'ok';
+        }else{
+            return Promise.reject(new Error('fail'));
+        }
     }
 }
 const mutations = {
     REQGOODSDETAIL(state, value){
         state.goodsDetail = value;
-    }
+    },
 }
 
 const state = {

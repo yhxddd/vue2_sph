@@ -30,3 +30,7 @@ export const reqGoodsDetail = (skuId) => {
     return requests({url:`/item/${skuId}`, method:'get'})
 }
 
+// 将产品加入购物车 /api/cart/addToCart/{ skuId }/{ skuNum }
+export const reqAddOrUpdateShop = (skuId,skuNum) => {
+    return requests({url:`/cart/addToCart/${skuId}/${skuNum}`, method:'post'})
+} 
