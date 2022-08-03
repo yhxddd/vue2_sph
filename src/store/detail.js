@@ -1,5 +1,6 @@
 import { reqGoodsDetail, reqAddOrUpdateShop } from "../api"
-
+// 临时身份游客，生成一个随机字符串
+import {getUUID} from '../utils/uuid_token.js'
 const actions = {
     async reqGoodsDetail(context,skuId){
         let result = await reqGoodsDetail(skuId);
@@ -25,7 +26,9 @@ const mutations = {
 }
 
 const state = {
-    goodsDetail:{}
+    goodsDetail:{},
+    // 游客身份
+    uuid_token:getUUID()
 }
 // 简化数据
 const getters = {

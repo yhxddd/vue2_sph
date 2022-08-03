@@ -4,22 +4,19 @@ import { reqCategoryList, reqBannerList, reqFloorList} from "../api";
 const actions = {
     async categoryList(context){
         let result = await reqCategoryList();
-        if(result.code == '200')
-        {
+        if(result.code == '200'){
             context.commit('CATEGORYLIST',result.data)
         }
     },
     async reqBannerList(context){
         let result = await reqBannerList();
-        if(result.code == '200')
-        {
+        if(result.code == '200'){
             context.commit('REQBANNERLIST',result.data)
         }
     },
     async reqFloorList(context){
         let result = await reqFloorList();
-        if(result.code == '200')
-        {
+        if(result.code == '200'){
             context.commit('REQFLOORLIST',result.data)
         }
     }

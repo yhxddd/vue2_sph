@@ -71,13 +71,13 @@ export default new VueRouter({
             meta:{show:true}
         },
         {
-            path:'/addCartSuccess',
+            path:'/addcartsuccess',
             name:'addCartSuccess',
             component:AddCartSuccess,
             meta:{show:true}
         },
         {
-            path:'/shopCart',
+            path:'/shopcart',
             component:ShopCart,
             meta:{show:true}
         },

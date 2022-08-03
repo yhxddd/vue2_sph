@@ -3,6 +3,7 @@ import axios from 'axios';
 // 引入进度条
 import nprogress from 'nprogress';
 //nprogress 是一个对象，对象的start、 done分别代表进度条开始和结束
+import store from '../store/index.js'
 
 // 引入进度条样式
 import "nprogress/nprogress.css"
@@ -17,6 +18,10 @@ const requests = axios.create({
 // 请求拦截器：再发请求之前，请求拦截器可以检测到
 requests.interceptors.request.use((config)=>{
     // config：配置对象，对象里有一个headers请求头很重要
+    if(store.state.detailModule.uuid_token){
+        // 给请求头添加userTempId
+        config.headers.userTempId = store.state.detailModule.uuid_token;
+    }
     nprogress.start();
     return config;
 })

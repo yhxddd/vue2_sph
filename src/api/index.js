@@ -34,3 +34,18 @@ export const reqGoodsDetail = (skuId) => {
 export const reqAddOrUpdateShop = (skuId,skuNum) => {
     return requests({url:`/cart/addToCart/${skuId}/${skuNum}`, method:'post'})
 } 
+
+// 获取购物车数据 /api/cart/cartList
+export const reqShopCartList = () => {
+    return requests({url:`/cart/cartList`, method:'get'})
+} 
+
+// 删除购物车商品 /cart/deleteCart/{skuId}
+export const reqDelShopCarById = (skuId) => {
+    return requests({url:`/cart/deleteCart/${skuId}`, method:'delete'});
+}
+
+// 修改购物车某产品选中状态 /cart/checkCart/{skuId}/{isChecked}
+export const reqChangeShopCheckedById = (skuId, isChecked) => {
+    return requests({url:`/cart/checkCart/${skuId}/${isChecked}`, method:'get'});
+}
