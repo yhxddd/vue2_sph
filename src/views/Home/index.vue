@@ -31,6 +31,8 @@ export default {
     },
     mounted(){
       this.$store.dispatch('reqFloorList');
+      // 获取登录的用户信息
+      //this.$store.dispatch('reqUserInfoToken');
     },
     computed:{
       ...mapState({floorList: state => state.homeModule.floorList})

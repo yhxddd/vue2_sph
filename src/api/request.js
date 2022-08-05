@@ -22,6 +22,9 @@ requests.interceptors.request.use((config)=>{
         // 给请求头添加userTempId
         config.headers.userTempId = store.state.detailModule.uuid_token;
     }
+    if(store.state.userModule.token){
+        config.headers.token =  store.state.userModule.token;
+    }
     nprogress.start();
     return config;
 })

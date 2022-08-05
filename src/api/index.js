@@ -49,3 +49,29 @@ export const reqDelShopCarById = (skuId) => {
 export const reqChangeShopCheckedById = (skuId, isChecked) => {
     return requests({url:`/cart/checkCart/${skuId}/${isChecked}`, method:'get'});
 }
+
+
+// 获取验证码 /user/passport/sendCode/phone
+export const reqGetCode = (phone) => {
+    return requests({url:`/user/passport/sendCode/${phone}`, method:'get'});
+}
+
+// 用户注册 /user/passport/register  ：phone, code, psd
+export const reqUserRegister = (data) => {
+    return requests({url:'/user/passport/register', data, method:'post'});
+}
+
+// 用户登录 /user/passport/login phone password
+export const reqUserLogin = (data) => {
+    return requests({url:'/user/passport/login', data, method:'post'});
+}
+
+// 获取用户信息（需要使用token向服务器请求用户信息）/user/passport/auth/getUserInfo
+export const reqUserInfoToken = () => {
+    return requests({url:'/user/passport/auth/getUserInfo', method:'get'});
+}
+
+// 用户退出登录 /user/passport/logout 
+export const reqUserLogout = () => {
+    return requests({url:'/user/passport/logout', method:'get'})
+}
