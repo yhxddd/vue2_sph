@@ -1,6 +1,7 @@
 import { reqSearchInfo } from "../api"
 
 const actions = {
+    // 获取搜索数据
     async reqSearchInfo(context,params={}){
         let result = await reqSearchInfo(params);
         if(result.code == '200')

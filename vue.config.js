@@ -11,5 +11,8 @@ module.exports = {
                 pathReWrite:{'^/api' : ''}
             }
         }
+    },
+    css:{
+        requireModuleExtension:true
     }
 }

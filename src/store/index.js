@@ -5,6 +5,7 @@ import searchModule from './search.js'
 import detailModule from './detail.js'
 import shopCartModule from './shopcart.js'
 import userModule from './user.js'
+import tradeModule from './trade.js'
 Vue.use(Vuex);
 
 
@@ -14,6 +15,7 @@ export default new Vuex.Store({
         searchModule,
         detailModule,
         shopCartModule,
-        userModule
+        userModule,
+        tradeModule
     }
 })

@@ -2,18 +2,21 @@
 import { reqCategoryList, reqBannerList, reqFloorList} from "../api";
 
 const actions = {
+    // 获取三级菜单数据
     async categoryList(context){
         let result = await reqCategoryList();
         if(result.code == '200'){
             context.commit('CATEGORYLIST',result.data)
         }
     },
+    // 获取轮播图数据
     async reqBannerList(context){
         let result = await reqBannerList();
         if(result.code == '200'){
             context.commit('REQBANNERLIST',result.data)
         }
     },
+    // 获取home下层级轮播的数据
     async reqFloorList(context){
         let result = await reqFloorList();
         if(result.code == '200'){

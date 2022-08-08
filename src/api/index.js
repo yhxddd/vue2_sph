@@ -73,5 +73,30 @@ export const reqUserInfoToken = () => {
 
 // 用户退出登录 /user/passport/logout 
 export const reqUserLogout = () => {
-    return requests({url:'/user/passport/logout', method:'get'})
+    return requests({url:'/user/passport/logout', method:'get'});
+}
+
+// 获取用户地址信息 /user/userAddress/auth/findUserAddressList 
+export const reqUserAddress = () => {
+    return requests({url:'/user/userAddress/auth/findUserAddressList', method:'get'});
+}
+
+// 获取商品清单 /order/auth/trade
+export const reqOrderInfo = () => {
+    return requests({url:'/order/auth/trade', method:'get'});
+}
+
+// 提交订单 /order/auth/submitOrder?tradeNo={tradeNo}
+export const reqSubmitOrder = (tradeNo, data) => {
+    return requests({url:`/order/auth/submitOrder?tradeNo=${tradeNo}`, data, method:'post'});
+}
+
+// 获取订单支付信息 /payment/weixin/createNative/{orderId}
+export const reqPayInfo = (orderId) => {
+    return requests({url:`/payment/weixin/createNative/${orderId}`, method:'get'});
+}
+
+// 获取订单支付状态 /payment/weixin/queryPayStatus/{orderId}
+export const reqPayState = (orderId) => {
+    return requests({url:`/payment/weixin/queryPayStatus/${orderId}`, method:'get'});
 }

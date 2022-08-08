@@ -1,7 +1,9 @@
 import { reqGoodsDetail, reqAddOrUpdateShop } from "../api"
 // 临时身份游客，生成一个随机字符串
 import {getUUID} from '../utils/uuid_token.js'
+
 const actions = {
+    // 获取商品详细信息
     async reqGoodsDetail(context,skuId){
         let result = await reqGoodsDetail(skuId);
         if(result.code == '200')
@@ -9,6 +11,7 @@ const actions = {
             context.commit('REQGOODSDETAIL',result.data)
         }
     },
+    // 添加或修改商品的数量
     async reqAddOrUpdateShop(context, {skuId, skuNum}){
         let result = await reqAddOrUpdateShop(skuId, skuNum);
         // 此次请求，服务器不会返回data数据，因此不用再写mutations等内容

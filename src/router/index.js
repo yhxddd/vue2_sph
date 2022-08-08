@@ -12,6 +12,12 @@ import Search from '../views/Search/index.vue'
 import Detail from '../views/Detail/index.vue'
 import AddCartSuccess from '../views/AddCartSuccess/index.vue'
 import ShopCart from '../views/ShopCart/index.vue'
+import Trade from '../views/Trade/index.vue'
+import Pay from '../views/Pay/index.vue'
+import PaySuccess from '../views/PaySuccess/index.vue'
+import Center from '../views/Center.index.vue'
+
+
 // 将vueRouter原型对象的push保存一份---这个push的this为window，下面是用时，需要改变this指向
 let orginPush = VueRouter.prototype.push;
 let orginReplace = VueRouter.prototype.replace;
@@ -81,6 +87,26 @@ let router = new VueRouter({
             component:ShopCart,
             meta:{show:true}
         },
+        {
+            path:'/trade',
+            component:Trade,
+            meta:{show:true}
+        },
+        {
+            path:'/pay',
+            component:Pay,
+            meta:{show:true}
+        },
+        {
+            path:'/paysuccess',
+            component:PaySuccess,
+            meta:{show:true}
+        },
+        {
+            path:'/center',
+            component:Center,
+            meta:{show:true}
+        },
         
     ],
     // 滚动行为 为跳转路由后页面位于哪个位置
@@ -96,7 +122,7 @@ router.beforeEach(async (to, from, next) => {
     let name = store.state.userModule.userInfo.name;
     if (token){
         // 如果用户登录，不能再进入login页面
-        if(to.path == '/login'){
+        if(to.path == '/login' || to.path == '/register'){
             next('/home')
         }else{
             // 如果用户名已有--- vuex中的name
