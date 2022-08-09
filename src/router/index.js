@@ -15,8 +15,9 @@ import ShopCart from '../views/ShopCart/index.vue'
 import Trade from '../views/Trade/index.vue'
 import Pay from '../views/Pay/index.vue'
 import PaySuccess from '../views/PaySuccess/index.vue'
-import Center from '../views/Center.index.vue'
-
+import Center from '../views/Center/index.vue'
+import MyOrder from '../views/Center/myOrder/index.vue'
+import GroupOrder from '../views/Center/groupOrder/index.vue'
 
 // 将vueRouter原型对象的push保存一份---这个push的this为window，下面是用时，需要改变this指向
 let orginPush = VueRouter.prototype.push;
@@ -53,59 +54,91 @@ let router = new VueRouter({
         {
             path:'/home',
             component:Home,
-            meta:{show:true}
+            // show: 展示footer、go：用户不用登录可以去
+            meta:{show:true,go:true}
         },
         {
             name:'searchComponent',
             path:'/search/:keyword?',
             component:Search,
-            meta:{show:true}
+            meta:{show:true,go:true}
         },
         {
             path:'/login',
             component:Login,
-            meta:{show:false}
+            meta:{show:false,go:true}
         },
         {
             path:'/register',
             component:Register,
-            meta:{show:false}
+            meta:{show:false,go:true}
         },
         {
             path:'/detail/:skuid',
             component:Detail,
-            meta:{show:true}
+            meta:{show:true,go:false}
         },
         {
             path:'/addcartsuccess',
             name:'addCartSuccess',
             component:AddCartSuccess,
-            meta:{show:true}
+            meta:{show:true,go:false}
         },
         {
             path:'/shopcart',
             component:ShopCart,
-            meta:{show:true}
+            meta:{show:true,go:false}
         },
         {
             path:'/trade',
             component:Trade,
-            meta:{show:true}
+            meta:{show:true,go:false},
+            // 独享守卫
+            beforeEnter:(to, from, next)=>{
+                if(from.path == '/shopcart'){
+                    next();
+                }else{
+                    // 停留在当前路由
+                    next(false);
+                }
+            }
         },
         {
             path:'/pay',
             component:Pay,
-            meta:{show:true}
+            meta:{show:true,go:false},
+            // 独享守卫
+            beforeEnter:(to, from, next)=>{
+                if(from.path == '/trade'){
+                    next();
+                }else{
+                    next(false);
+                }
+            }
         },
         {
             path:'/paysuccess',
             component:PaySuccess,
-            meta:{show:true}
+            meta:{show:true,go:false}
         },
         {
             path:'/center',
             component:Center,
-            meta:{show:true}
+            meta:{show:true,go:false},
+            children:[
+                {
+                    path:'myorder',
+                    component:MyOrder,
+                },
+                {
+                    path:'grouporder',
+                    component:GroupOrder
+                },
+                {
+                    path: '',
+                    redirect: 'myorder'
+                }
+            ]
         },
         
     ],
@@ -142,8 +175,14 @@ router.beforeEach(async (to, from, next) => {
             }
         }
     }else{
-        // 未登录 暂时未处理
-        next();
+        // 未登录 不能去交易、支付、个人中心； 只能去登录、注册、home、search
+        if(to.meta.go){
+            next()
+        }else{
+            // 把未登录想去的地址，存在url地址中
+            next('/login?redirect=' + to.path);
+        }
+        
     }
 })
 
