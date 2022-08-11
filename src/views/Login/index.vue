@@ -79,11 +79,10 @@
         try{
           const{phone, password} = this;
           (phone && password) && await this.$store.dispatch('reqUserLogin',{phone, password})
-          // 登录时 需要看query参数中有没有想去的页面，有了跳到指定路由，没有继续到home
-          let toPath = this.$route.query.redirect || '/home';
+          let toPath = this.$route.query.redirect || "/home";
           this.$router.push(toPath);
         }catch(error){
-          alert(error)
+          alert(error.message)
         }
       }
     }

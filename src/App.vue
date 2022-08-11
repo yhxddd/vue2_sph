@@ -1,5 +1,6 @@
 <template>
   <div id="app">
+    <!-- <h1 v-upper="msg"></h1> -->
     <MyHeader></MyHeader>
     <router-view></router-view>
     <MyFooter v-show="$route.meta.show"></MyFooter>
@@ -12,6 +13,11 @@ import MyHeader from './components/Header/index.vue'
 import MyFooter from './components/Footer/index.vue'
 export default {
   name: 'App',
+  data(){
+    return {
+      msg:'abc'
+    }
+  },
   components: {
     MyHeader,
     MyFooter

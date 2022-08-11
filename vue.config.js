@@ -12,7 +12,6 @@ module.exports = {
             }
         }
     },
-    css:{
-        requireModuleExtension:true
-    }
+    // 打包去掉map文件
+    productionSourceMap:false
 }

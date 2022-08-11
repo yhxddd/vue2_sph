@@ -148,7 +148,6 @@ export default {
         // 获取我的订单列表数据
         async getData(){
             let result = await this.$API.reqMyOrderList(this.page, this.limit);
-            console.log(result)
             this.myOrderList = result.data;
         },
         getPageNo(page){
